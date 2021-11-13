@@ -4,7 +4,7 @@ import com.tw.assignments.wallet.exceptions.WalletAmountIsInsufficientException;
 
 public class WalletTransactions extends RuntimeException implements Wallet {
 
-    private double totalMoney ;
+    private double totalMoney;
     private boolean isMoneyWithdrawn;
     private boolean isMoneyAdded;
 
@@ -13,15 +13,16 @@ public class WalletTransactions extends RuntimeException implements Wallet {
 
     @Override
     public void addMoney(Money amount) {
-        isMoneyAdded =true;
-        totalMoney+=amount.getAmount();
+        isMoneyAdded = true;
+        totalMoney += amount.getAmount();
     }
 
     @Override
     public void withdrawMoney(Money amount) {
-        if(totalMoney<amount.getAmount()) throw new WalletAmountIsInsufficientException("Total Amount In Wallet is less than Withdrawing amount.");
+        if (totalMoney < amount.getAmount())
+            throw new WalletAmountIsInsufficientException("Total Amount In Wallet is less than Withdrawing amount.");
         isMoneyWithdrawn = true;
-        totalMoney-= amount.getAmount();
+        totalMoney -= amount.getAmount();
     }
 
     @Override
@@ -38,6 +39,6 @@ public class WalletTransactions extends RuntimeException implements Wallet {
     }
 
     public double totalMoneyInWalletInDollars() {
-        return totalMoneyInWallet()/74.85;
+        return totalMoneyInWallet() / 74.85;
     }
 }

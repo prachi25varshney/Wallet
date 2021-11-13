@@ -20,7 +20,7 @@ public class WalletTransactionsTest {
         addMoney.addMoney(rupee);
         addMoney.addMoney(dollar);
 
-        assertThat(true,is(equalTo(addMoney.isMoneyAdded())));
+        assertThat(true, is(equalTo(addMoney.isMoneyAdded())));
     }
 
     @Test
@@ -38,12 +38,12 @@ public class WalletTransactionsTest {
     void shouldReturnWhenAbleToWithdrawTenRupees() {
         Money rupee = Money.createRupee(10);
         Money dollar = Money.createDollar(1);
-        WalletTransactions wallet =  new WalletTransactions();
+        WalletTransactions wallet = new WalletTransactions();
 
         wallet.addMoney(dollar);
         wallet.withdrawMoney(rupee);
 
-        assertThat(64.85,is(equalTo(wallet.totalMoneyInWallet())));
+        assertThat(64.85, is(equalTo(wallet.totalMoneyInWallet())));
     }
 
     @Test
@@ -51,12 +51,12 @@ public class WalletTransactionsTest {
 
         Money rupee = Money.createRupee(50);
         Money dollar = Money.createDollar(1);
-        WalletTransactions wallet =  new WalletTransactions();
+        WalletTransactions wallet = new WalletTransactions();
 
         wallet.addMoney(rupee);
         wallet.addMoney(dollar);
 
-        assertThat(124.85,is(equalTo(wallet.totalMoneyInWallet())));
+        assertThat(124.85, is(equalTo(wallet.totalMoneyInWallet())));
     }
 
     @Test
@@ -64,23 +64,23 @@ public class WalletTransactionsTest {
         Money firstRupee = Money.createRupee(74.85);
         Money dollar = Money.createDollar(1);
         Money secondRupee = Money.createRupee(149.7);
-        WalletTransactions wallet =  new WalletTransactions();
+        WalletTransactions wallet = new WalletTransactions();
 
         wallet.addMoney(firstRupee);
         wallet.addMoney(dollar);
         wallet.addMoney(secondRupee);
 
-        assertThat(4.0,is(equalTo(wallet.totalMoneyInWalletInDollars())));
+        assertThat(4.0, is(equalTo(wallet.totalMoneyInWalletInDollars())));
     }
 
     @Test
     void shouldThrowWalletAmountIsInsufficientExceptionWhenWithdrawAmountIsMoreThanTotalInWallet() {
         Money rupee = Money.createRupee(10);
         Money dollar = Money.createDollar(1);
-        WalletTransactions wallet =  new WalletTransactions();
+        WalletTransactions wallet = new WalletTransactions();
 
         wallet.addMoney(rupee);
 
-        Assertions.assertThrows(WalletAmountIsInsufficientException.class,  () -> wallet.withdrawMoney(dollar));
+        Assertions.assertThrows(WalletAmountIsInsufficientException.class, () -> wallet.withdrawMoney(dollar));
     }
 }

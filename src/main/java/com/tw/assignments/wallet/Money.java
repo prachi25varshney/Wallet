@@ -1,17 +1,19 @@
 package com.tw.assignments.wallet;
 
-enum Currency{
+enum Currency {
     Rupee(1), Dollar(74.85);
 
     private double baseFactor;
 
-    Currency(double baseFactor){
+    Currency(double baseFactor) {
         this.baseFactor = baseFactor;
     }
-    public double multiplyWithBaseFactor(double value){
-        return value*baseFactor;
+
+    public double multiplyWithBaseFactor(double value) {
+        return value * baseFactor;
     }
 }
+
 public class Money {
     private double amount;
     private Currency currency;
