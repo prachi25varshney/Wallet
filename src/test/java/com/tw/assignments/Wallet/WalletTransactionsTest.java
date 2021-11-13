@@ -13,8 +13,11 @@ public class WalletTransactionsTest {
     public void shouldReturnTrueWhenMoneyAddedInWallet() {
 
         WalletTransactions addMoney = new WalletTransactions();
+        Money rupee = Money.createRupee(1);
+        Money dollar = Money.createDollar(1);
 
-        addMoney.addMoney(1);
+        addMoney.addMoney(rupee);
+        addMoney.addMoney(dollar);
 
         assertThat(true,is(equalTo(addMoney.isMoneyAdded)));
     }
@@ -23,8 +26,9 @@ public class WalletTransactionsTest {
     public void shouldReturnTrueAbleToTakeMoneyFromWallet() {
 
         WalletTransactions withdrawMoney = new WalletTransactions();
+        Money rupee = new Money(10,Currency.Rupee);
 
-        withdrawMoney.withdrawMoney(1);
+        withdrawMoney.withdrawMoney(rupee);
 
         assertThat(true, is(equalTo(withdrawMoney.isMoneyWithdrawn)));
     }
