@@ -36,4 +36,8 @@ public class WalletTransactions implements Wallet {
     public boolean isMoneyWithdrawn() {
         return isMoneyWithdrawn;
     }
+
+    public double totalMoneyInWalletInDollars() {
+        return totalMoneyInWallet()/74.85;
+    }
 }

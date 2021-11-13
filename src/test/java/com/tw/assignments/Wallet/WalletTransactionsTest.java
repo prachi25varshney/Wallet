@@ -57,4 +57,18 @@ public class WalletTransactionsTest {
 
         assertThat(124.85,is(equalTo(wallet.totalMoneyInWallet())));
     }
+
+    @Test
+    public void shouldEquateTotalMoneyInDollars() {
+        Money firstRupee = Money.createRupee(74.85);
+        Money dollar = Money.createDollar(1);
+        Money secondRupee = Money.createRupee(149.7);
+        WalletTransactions wallet =  new WalletTransactions();
+
+        wallet.addMoney(firstRupee);
+        wallet.addMoney(dollar);
+        wallet.addMoney(secondRupee);
+
+        assertThat(4.0,is(equalTo(wallet.totalMoneyInWalletInDollars())));
+    }
 }
