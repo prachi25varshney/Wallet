@@ -13,11 +13,11 @@ enum Currency{
     }
 }
 public class Money {
-    private double money;
+    private double amount;
     private Currency currency;
 
-    public Money(double money, Currency currency) {
-        this.money = money;
+    public Money(double amount, Currency currency) {
+        this.amount = amount;
         this.currency = currency;
     }
 
@@ -25,8 +25,11 @@ public class Money {
         return new Money(rupee, Currency.Rupee);
     }
 
-
     public static Money createDollar(double dollar) {
         return new Money(dollar, Currency.Dollar);
+    }
+
+    public double getAmount() {
+        return currency.multiplyWithBaseFactor(amount);
     }
 }

@@ -19,17 +19,30 @@ public class WalletTransactionsTest {
         addMoney.addMoney(rupee);
         addMoney.addMoney(dollar);
 
-        assertThat(true,is(equalTo(addMoney.isMoneyAdded)));
+        assertThat(true,is(equalTo(addMoney.isMoneyAdded())));
     }
 
     @Test
     public void shouldReturnTrueAbleToTakeMoneyFromWallet() {
 
         WalletTransactions withdrawMoney = new WalletTransactions();
-        Money rupee = new Money(10,Currency.Rupee);
+        Money rupee = Money.createRupee(1);
 
         withdrawMoney.withdrawMoney(rupee);
 
-        assertThat(true, is(equalTo(withdrawMoney.isMoneyWithdrawn)));
+        assertThat(true, is(equalTo(withdrawMoney.isMoneyWithdrawn())));
+    }
+
+    @Test
+    public void shouldEquateTotalMoneyInRupees() {
+
+        Money rupee = Money.createRupee(50);
+        Money dollar = Money.createDollar(1);
+        WalletTransactions wallet =  new WalletTransactions();
+
+        wallet.addMoney(rupee);
+        wallet.addMoney(dollar);
+
+        assertThat(124.85,is(equalTo(wallet.totalMoneyInWallet())));
     }
 }
