@@ -24,7 +24,7 @@ public class WalletTransactionsTest {
     }
 
     @Test
-    public void shouldReturnTrueAbleToTakeMoneyFromWallet() {
+    public void shouldReturnTrueWhenMoneyWithdrawnFromWallet() {
 
         WalletTransactions withdrawMoney = new WalletTransactions();
         Money rupee = Money.createRupee(1);
@@ -35,7 +35,7 @@ public class WalletTransactionsTest {
     }
 
     @Test
-    void shouldReturnWhenAbleToWithdrawTenRupees() {
+    void shouldReturnWhenAbleToWithdrawTenRupeesFromWallet() {
         Money rupee = Money.createRupee(10);
         Money dollar = Money.createDollar(1);
         WalletTransactions wallet = new WalletTransactions();
