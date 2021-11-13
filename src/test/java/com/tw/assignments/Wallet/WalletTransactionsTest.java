@@ -34,6 +34,18 @@ public class WalletTransactionsTest {
     }
 
     @Test
+    void shouldReturnWhenAbleToWithdrawTenRupees() {
+        Money rupee = Money.createRupee(10);
+        Money dollar = Money.createDollar(1);
+        WalletTransactions wallet =  new WalletTransactions();
+
+        wallet.addMoney(dollar);
+        wallet.withdrawMoney(rupee);
+
+        assertThat(64.85,is(equalTo(wallet.totalMoneyInWallet())));
+    }
+
+    @Test
     public void shouldEquateTotalMoneyInRupees() {
 
         Money rupee = Money.createRupee(50);
