@@ -1,5 +1,7 @@
-package com.tw.assignments.Wallet;
+package com.tw.assignments.wallet;
 
+import com.tw.assignments.wallet.exceptions.WalletAmountIsInsufficientException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -9,7 +11,6 @@ import static org.hamcrest.Matchers.is;
 public class WalletTransactionsTest {
 
     @Test
-
     public void shouldReturnTrueWhenMoneyAddedInWallet() {
 
         WalletTransactions addMoney = new WalletTransactions();
@@ -70,5 +71,16 @@ public class WalletTransactionsTest {
         wallet.addMoney(secondRupee);
 
         assertThat(4.0,is(equalTo(wallet.totalMoneyInWalletInDollars())));
+    }
+
+    @Test
+    void shouldThrowWalletAmountIsInsufficientExceptionWhenWithdrawAmountIsMoreThanTotalInWallet() {
+        Money rupee = Money.createRupee(10);
+        Money dollar = Money.createDollar(1);
+        WalletTransactions wallet =  new WalletTransactions();
+
+        wallet.addMoney(rupee);
+
+        Assertions.assertThrows(WalletAmountIsInsufficientException.class,  () -> wallet.withdrawMoney(dollar));
     }
 }

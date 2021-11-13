@@ -1,13 +1,12 @@
-package com.tw.assignments.Wallet;
+package com.tw.assignments.wallet;
 
-import org.hamcrest.Matcher;
+import com.tw.assignments.wallet.exceptions.WalletAmountIsInsufficientException;
 
-public class WalletTransactions implements Wallet {
+public class WalletTransactions extends RuntimeException implements Wallet {
 
-    private double totalMoney;
+    private double totalMoney ;
     private boolean isMoneyWithdrawn;
     private boolean isMoneyAdded;
-    Currency currency;
 
     public WalletTransactions() {
     }
@@ -20,6 +19,7 @@ public class WalletTransactions implements Wallet {
 
     @Override
     public void withdrawMoney(Money amount) {
+        if(totalMoney<amount.getAmount()) throw new WalletAmountIsInsufficientException("Total Amount In Wallet is less than Withdrawing amount.");
         isMoneyWithdrawn = true;
         totalMoney-= amount.getAmount();
     }

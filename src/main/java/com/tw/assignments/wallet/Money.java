@@ -1,4 +1,4 @@
-package com.tw.assignments.Wallet;
+package com.tw.assignments.wallet;
 
 enum Currency{
     Rupee(1), Dollar(74.85);

@@ -1,4 +1,4 @@
-package com.tw.assignments.Wallet;
+package com.tw.assignments.wallet;
 
 public interface Wallet {
     public void addMoney(Money amount);
