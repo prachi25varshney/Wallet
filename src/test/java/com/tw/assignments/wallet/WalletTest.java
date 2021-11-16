@@ -7,56 +7,62 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-public class WalletTransactionsTest {
+public class WalletTest {
 
     @Test
     public void shouldReturnTrueWhenMoneyAddedInWallet() {
 
-        WalletTransactions addMoney = new WalletTransactions();
+        Wallet wallet = new Wallet();
         Money rupee = Money.createRupee(1);
         Money dollar = Money.createDollar(1);
+        Money money = new Money(75.85);
 
-        addMoney.addMoney(rupee);
-        addMoney.addMoney(dollar);
+        wallet.add(rupee);
+        wallet.add(dollar);
 
-        assertThat(true, is(equalTo(addMoney.isMoneyAdded())));
+        assertThat(money.getAmount(), is(equalTo(wallet.balance().getAmount())));
     }
 
     @Test
     public void shouldReturnTrueWhenMoneyWithdrawnFromWallet() {
 
-        WalletTransactions withdrawMoney = new WalletTransactions();
+        Wallet wallet = new Wallet();
         Money rupee = Money.createRupee(1);
+        Money money = new Money(0);
 
-        withdrawMoney.withdrawMoney(rupee);
+        wallet.add(rupee);
+        wallet.withdraw(rupee);
 
-        assertThat(true, is(equalTo(withdrawMoney.isMoneyWithdrawn())));
+        assertThat(money.getAmount(), is(equalTo(wallet.balance().getAmount())));
     }
 
     @Test
     void shouldReturnWhenAbleToWithdrawTenRupeesFromWallet() {
         Money rupee = Money.createRupee(10);
         Money dollar = Money.createDollar(1);
-        WalletTransactions wallet = new WalletTransactions();
+        Money money = new Money(64.85);
+        Wallet wallet = new Wallet();
 
-        wallet.addMoney(dollar);
-        wallet.withdrawMoney(rupee);
+        wallet.add(dollar);
+        wallet.withdraw(rupee);
 
-        assertThat(64.85, is(equalTo(wallet.totalMoneyInWallet())));
+        assertThat(money.getAmount(), is(equalTo(wallet.balance().getAmount())));
+
     }
 
     @Test
-    public void shouldEquateTotalMoneyInRupees() {
+    public void shouldEquateTotalMoneyInRupeesWhenPreferredCurrencyIsRupees() {
 
         Money rupee = Money.createRupee(50);
         Money dollar = Money.createDollar(1);
-        WalletTransactions wallet = new WalletTransactions();
+        Wallet wallet = new Wallet();
 
-        wallet.addMoney(rupee);
-        wallet.addMoney(dollar);
+        wallet.add(rupee);
+        wallet.add(dollar);
 
-        assertThat(124.85, is(equalTo(wallet.totalMoneyInWallet())));
+        assertThat(124.85, is(equalTo(wallet.balance().getAmount())));
     }
 
     @Test
@@ -64,23 +70,23 @@ public class WalletTransactionsTest {
         Money firstRupee = Money.createRupee(74.85);
         Money dollar = Money.createDollar(1);
         Money secondRupee = Money.createRupee(149.7);
-        WalletTransactions wallet = new WalletTransactions();
+        Wallet wallet = new Wallet();
 
-        wallet.addMoney(firstRupee);
-        wallet.addMoney(dollar);
-        wallet.addMoney(secondRupee);
+        wallet.add(firstRupee);
+        wallet.add(dollar);
+        wallet.add(secondRupee);
 
-        assertThat(4.0, is(equalTo(wallet.totalMoneyInWalletInDollars())));
+        assertThat(4.0, is(equalTo(wallet.balance())));
     }
 
     @Test
     void shouldThrowWalletAmountIsInsufficientExceptionWhenWithdrawAmountIsMoreThanTotalInWallet() {
         Money rupee = Money.createRupee(10);
         Money dollar = Money.createDollar(1);
-        WalletTransactions wallet = new WalletTransactions();
+        Wallet wallet = new Wallet();
 
-        wallet.addMoney(rupee);
+        wallet.add(rupee);
 
-        Assertions.assertThrows(WalletAmountIsInsufficientException.class, () -> wallet.withdrawMoney(dollar));
+        Assertions.assertThrows(WalletAmountIsInsufficientException.class, () -> wallet.withdraw(dollar));
     }
 }
