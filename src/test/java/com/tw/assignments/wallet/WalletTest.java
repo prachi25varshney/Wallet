@@ -16,7 +16,7 @@ public class WalletTest {
         Wallet wallet = new Wallet();
         Money rupee = Money.createRupee(1);
         Money dollar = Money.createDollar(1);
-        Money money = new Money(75.85);
+        Money money = new Money(75.85, Currency.Rupee);
 
         wallet.add(rupee);
         wallet.add(dollar);
@@ -29,7 +29,7 @@ public class WalletTest {
 
         Wallet wallet = new Wallet();
         Money rupee = Money.createRupee(1);
-        Money money = new Money(0);
+        Money money = new Money(0, Currency.Rupee);
 
         wallet.add(rupee);
         wallet.withdraw(rupee);
@@ -41,7 +41,7 @@ public class WalletTest {
     void shouldReturnWhenAbleToWithdrawTenRupeesFromWallet() {
         Money rupee = Money.createRupee(10);
         Money dollar = Money.createDollar(1);
-        Money money = new Money(64.85);
+        Money money = new Money(64.85, Currency.Rupee);
         Wallet wallet = new Wallet();
 
         wallet.add(dollar);
@@ -56,7 +56,7 @@ public class WalletTest {
 
         Money rupee = Money.createRupee(50);
         Money dollar = Money.createDollar(1);
-        Money balance = new Money(124.85);
+        Money balance = new Money(124.85, Currency.Rupee);
         Wallet wallet = new Wallet();
 
         wallet.add(rupee);
@@ -70,7 +70,7 @@ public class WalletTest {
         Money firstRupee = Money.createRupee(74.85);
         Money dollar = Money.createDollar(1);
         Money secondRupee = Money.createRupee(149.7);
-        Money balance = new Money(4.0);
+        Money balance = new Money(4.0, Currency.Dollar);
         Wallet wallet = new Wallet();
 
         wallet.add(firstRupee);

@@ -1,30 +1,23 @@
 package com.tw.assignments.wallet;
 
-import com.tw.assignments.wallet.exceptions.WalletAmountIsInsufficientException;
-
-public class Wallet extends RuntimeException {
+public class Wallet {
 
     private Money balance;
 
     public Wallet() {
-        balance = new Money(0);
+        balance = new Money(0, Currency.Rupee);
     }
 
     public void add(Money money) {
-        setBalance(new Money(balance.getAmount() + money.getAmount()));
+        balance = Money.addMoney(balance, money);
     }
 
     public void withdraw(Money money) {
-        if (balance.getAmount() < money.getAmount())
-            throw new WalletAmountIsInsufficientException("Total Amount In Wallet is less than Withdrawing amount.");
-        setBalance(new Money(balance.getAmount() - money.getAmount()));
+
+        balance = Money.withdrawMoney(balance, money);
     }
 
     public Money balance(Currency preferredCurrency) {
-        return new Money(balance.getAmount() / preferredCurrency.baseFactor);
-    }
-
-    public void setBalance(Money balance) {
-        this.balance = balance;
+        return Money.moneyInPreferredCurrency(balance, preferredCurrency);
     }
 }
