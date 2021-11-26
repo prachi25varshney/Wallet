@@ -9,15 +9,15 @@ public class Wallet {
     }
 
     public void add(Money money) {
-        balance = Money.addMoney(balance, money);
+        balance = balance.addMoney(money);
     }
 
     public void withdraw(Money money) {
 
-        balance = Money.withdrawMoney(balance, money);
+        balance = balance.withdrawMoney(money);
     }
 
     public Money balance(Currency preferredCurrency) {
-        return Money.moneyInPreferredCurrency(balance, preferredCurrency);
+        return balance.moneyInPreferredCurrency(preferredCurrency);
     }
 }

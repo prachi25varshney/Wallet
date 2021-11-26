@@ -37,22 +37,22 @@ public class Money {
         return new Money(dollar, Currency.Dollar);
     }
 
-    public static Money addMoney(Money balance, Money money) {
-        double currentBalance = balance.currency.convertMoney(balance.amount);
+    public Money addMoney(Money money) {
+        double currentBalance =this.currency.convertMoney(this.amount);
         double moneyToAdd = money.currency.convertMoney(money.amount);
-        return new Money(currentBalance + moneyToAdd, Currency.Rupee);
+        return new Money(currentBalance+ moneyToAdd , Currency.Rupee);
     }
 
-    public static Money withdrawMoney(Money balance, Money money) {
-        double currentBalance = balance.currency.convertMoney(balance.amount);
+    public Money withdrawMoney(Money money) {
+        double currentBalance = this.currency.convertMoney(this.amount);
         double moneyToWithdraw = money.currency.convertMoney(money.amount);
         if (currentBalance < moneyToWithdraw)
             throw new WalletAmountIsInsufficientException("Total Amount In Wallet is less than Withdrawing amount.");
         return new Money(currentBalance - moneyToWithdraw, Currency.Rupee);
     }
 
-    public static Money moneyInPreferredCurrency(Money balance, Currency preferredCurrency) {
-        double totalBalance = balance.currency.convertMoney(balance.amount);
+    public Money moneyInPreferredCurrency(Currency preferredCurrency) {
+        double totalBalance = this.currency.convertMoney(this.amount);
         return new Money(preferredCurrency.getAmountInPreferredCurrency(totalBalance, preferredCurrency), preferredCurrency);
     }
 
